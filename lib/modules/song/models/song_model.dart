@@ -14,7 +14,7 @@ class SongModel {
   final bool explicitContent;
   final bool hasLyrics;
   final String? lyricsId;
-  final String releaseDate;
+  final String? releaseDate;
   final int duration;
   final String copyright;
   final String? albumId;
@@ -36,7 +36,7 @@ class SongModel {
     required this.explicitContent,
     required this.hasLyrics,
     required this.lyricsId,
-    required this.releaseDate,
+    this.releaseDate,
     required this.duration,
     required this.copyright,
     required this.albumId,
@@ -55,7 +55,7 @@ class SongModel {
       permaUrl: map["perma_url"] as String,
       language: map["language"] as String,
       year: map["year"] as String,
-      playCount: int.parse(map["play_count"] as String),
+      playCount: int.parse("0${map["play_count"]}"),
       explicitContent: map["explicit_content"] == "1",
       images: DownloadUrl.imagesUrls(map['image']), // !TODO!
       label: map["more_info"]['label'] as String,
@@ -66,9 +66,10 @@ class SongModel {
       copyright: map["more_info"]['copyright_text'],
       albumId: map["more_info"]['album_id'],
       albumName: map["more_info"]['album'],
-      artists: List<ArtistMapModel>.from((map["more_info"]['artistMap']
-              ['artists'])
-          .map((e) => ArtistMapModel.fromMap(e))),
+      artists: List<ArtistMapModel>.from(
+        (map["more_info"]['artistMap']['artists'])
+            .map((e) => ArtistMapModel.fromMap(e)),
+      ),
       urls: DownloadUrl.songUrls(map['more_info']['encrypted_media_url']),
     );
   }

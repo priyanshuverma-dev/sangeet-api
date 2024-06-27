@@ -2,22 +2,23 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sangeet_api/common/endpoints.dart';
-import 'package:sangeet_api/modules/song/models/song_lyrics_model.dart';
+import 'package:sangeet_api/modules/artists/models/artist_model.dart';
+import 'package:sangeet_api/modules/artists/models/artist_songs_model.dart';
 import 'package:sangeet_api/modules/song/models/song_model.dart';
 
-class SongController {
+class ArtistController {
   final Dio _client;
 
-  SongController({
+  ArtistController({
     required Dio client,
   }) : _client = client;
 
-  Future<SongModel?> getById({required String songId}) async {
+  Future<ArtistModel?> getById({required String artistId}) async {
     try {
       final res = await _client.get("/", queryParameters: {
         "ctx": "web6dot0",
-        "__call": Endpoints.songs.id,
-        "pids": songId,
+        "__call": Endpoints.artists.id,
+        "artistId": artistId,
       });
 
       final resp = jsonDecode(res.data);
@@ -26,23 +27,25 @@ class SongController {
             resp['error']["msg"], StackTrace.current);
       }
 
-      final song = SongModel.fromMap(resp['songs'][0]);
-
-      return song;
-    } catch (e) {
+      final artist = ArtistModel.fromMap(resp);
+      return artist;
+    } catch (e, st) {
       if (kDebugMode) {
-        print("ERROR: $e");
+        print("ERROR: $e $st");
       }
       return null;
     }
   }
 
-  Future<SongLyricsModel?> getLyricsById({required String lyricsId}) async {
+  Future<ArtistSongsModel?> getArtistSongs(
+      {required String artistId, int page = 0}) async {
     try {
       final res = await _client.get("/", queryParameters: {
         "ctx": "web6dot0",
-        "__call": Endpoints.songs.lyrics,
-        "lyrics_id": lyricsId,
+        "__call": Endpoints.artists.songs,
+        "artistId": artistId,
+        "page": page,
+        "sort_order": "latest"
       });
 
       final resp = jsonDecode(res.data);
@@ -51,12 +54,15 @@ class SongController {
             resp['error']["msg"], StackTrace.current);
       }
 
-      final lyrics = SongLyricsModel.fromMap(resp);
-
-      return lyrics;
-    } catch (e) {
+      return ArtistSongsModel(
+        total: resp['topSongs']['total'],
+        songs: List<SongModel>.from(resp['topSongs']['songs'].map(
+          (e) => SongModel.fromMap(e),
+        )),
+      );
+    } catch (e, st) {
       if (kDebugMode) {
-        print("ERROR: $e");
+        print("ERROR: $e \n $st");
       }
       return null;
     }
