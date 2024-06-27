@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sangeet_api/common/endpoints.dart';
-import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
+import 'package:sangeet_api/modules/song/models/song_lyrics_model.dart';
+import 'package:sangeet_api/modules/song/models/song_model.dart';
 
 class SongController {
   final Dio _client;
@@ -14,7 +12,7 @@ class SongController {
     required Dio client,
   }) : _client = client;
 
-  Future<dynamic> getById({required String songId}) async {
+  Future<SongModel?> getById({required String songId}) async {
     try {
       final res = await _client.get("/", queryParameters: {
         "ctx": "web6dot0",
@@ -27,15 +25,34 @@ class SongController {
         throw Error.throwWithStackTrace(resp["msg"], StackTrace.current);
       }
 
-      final f = File('E:/code/apps/sangeet_api/data.json');
-      f.createSync();
-      f.writeAsStringSync(jsonEncode(resp));
+      final song = SongModel.fromMap(resp['songs'][0]);
 
-      final artists = resp['songs'][0]['more_info']['artistMap']
-              ['primary_artists']
-          .map((e) => ArtistMapModel.fromMap(e));
+      return song;
+    } catch (e) {
+      if (kDebugMode) {
+        print("ERROR: $e");
+      }
+      return null;
+    }
+  }
 
-      return artists;
+  Future<SongLyricsModel?> getLyricsById({required String lyricsId}) async {
+    try {
+      final res = await _client.get("/", queryParameters: {
+        "ctx": "web6dot0",
+        "__call": Endpoints.songs.lyrics,
+        "lyrics_id": lyricsId,
+      });
+
+      final resp = jsonDecode(res.data);
+      if (res.statusCode != 200 || resp["status"] == "failure") {
+        throw Error.throwWithStackTrace(
+            resp['error']["msg"], StackTrace.current);
+      }
+
+      final lyrics = SongLyricsModel.fromMap(resp);
+
+      return lyrics;
     } catch (e) {
       if (kDebugMode) {
         print("ERROR: $e");
