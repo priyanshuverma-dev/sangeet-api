@@ -4,6 +4,18 @@ import 'package:sangeet_api/sangeet_api.dart';
 void main() {
   final api = SangeetAPI();
 
+  group("Explore API Test", () {
+    test("Get Trendings Check", () async {
+      final data = await api.explore.trending();
+      expect(data?.total, 10);
+    });
+
+    test("Get Browse Data Check", () async {
+      final data = await api.explore.browse();
+      expect(data?.charts.length, 6);
+    });
+  });
+
   group("Search API Test", () {
     test("Get Global Search Check", () async {
       final res = await api.search.global(query: "Dua Lipa");

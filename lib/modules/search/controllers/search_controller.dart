@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:sangeet_api/common/endpoints.dart';
 import 'package:sangeet_api/modules/album/models/album_model.dart';
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
-import 'package:sangeet_api/modules/artists/models/artist_model.dart';
 import 'package:sangeet_api/modules/playlist/models/playlist_map_model.dart';
 import 'package:sangeet_api/modules/search/models/search_result_model.dart';
 import 'package:sangeet_api/modules/song/models/song_model.dart';

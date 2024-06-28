@@ -13,6 +13,7 @@ class SearchEndpoints {
   const SearchEndpoints();
 
   final String all = 'autocomplete.get';
+  final String top = 'content.getTopSearches';
   final String songs = 'search.getResults';
   final String albums = 'search.getAlbumResults';
   final String artists = 'search.getArtistResults';
