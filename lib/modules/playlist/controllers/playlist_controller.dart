@@ -31,11 +31,15 @@ class PlaylistController {
             resp['error']["msg"], StackTrace.current);
       }
 
+      if (resp["title"] == '') {
+        throw Error.safeToString("Playlist not found");
+      }
+
       final playlist = PlaylistModel.fromMap(resp);
       return playlist;
-    } catch (e, st) {
+    } catch (e) {
       if (kDebugMode) {
-        print("ERROR: $e $st");
+        print("ERROR: $e");
       }
       return null;
     }

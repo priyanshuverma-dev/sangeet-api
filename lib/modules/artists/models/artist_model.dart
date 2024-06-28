@@ -53,7 +53,7 @@ class ArtistModel {
         name: map['name'],
         subtitle: map['subtitle'],
         images: DownloadUrl.imagesUrls(map['image']),
-        followersCount: int.parse(map['follower_count']),
+        followersCount: int.parse('0${map['follower_count']}'),
         type: map['type'],
         isVerified: map['isVerified'],
         dominantLanguage: map['dominantLanguage'],

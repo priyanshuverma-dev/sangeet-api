@@ -24,12 +24,15 @@ class AlbumController {
         throw Error.throwWithStackTrace(
             resp['error']["msg"], StackTrace.current);
       }
+      if (resp['id'] == "") {
+        throw Error.throwWithStackTrace("Album not found", StackTrace.current);
+      }
 
       final album = AlbumModel.fromMap(resp);
       return album;
-    } catch (e, st) {
+    } catch (e) {
       if (kDebugMode) {
-        print("ERROR: $e $st");
+        print("ERROR: $e");
       }
       return null;
     }

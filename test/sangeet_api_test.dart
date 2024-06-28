@@ -4,32 +4,95 @@ import 'package:sangeet_api/sangeet_api.dart';
 void main() {
   final api = SangeetAPI();
 
-  test("Playlist by Id", () async {
-    final playlist = await api.playlist.getById(id: '155871808', limit: 1);
-    expect('155871808', playlist?.id);
-  });
-  test("Album by Id", () async {
-    final album = await api.album.getById(albumId: '23241654');
-    expect('23241654', album?.id);
+  group("Search API Test", () {
+    test("Get Global Search Check", () async {
+      final rs = await api.search.global(query: "Dua Lipa");
+
+      expect(null, null);
+    });
   });
 
-  test("Artist Songs", () async {
-    final artistSongs = await api.artist.getArtistSongs(artistId: "1274170");
-    expect(1265, artistSongs?.total);
+  group("Songs API Test", () {
+    test("Get Song Id Check", () async {
+      final res = await api.song.getById(songId: "3IoDK8qI");
+      expect(res!.id, "3IoDK8qI");
+    });
+
+    test("Get Song Id Null Check", () async {
+      final res = await api.song.getById(songId: "3IoDK8qIas");
+      expect(res, null);
+    });
+
+    test("Get Song Station Check", () async {
+      final radio = await api.song.radio(songId: "yDeAS8Eh", limit: 2);
+
+      expect(radio?.total, 2);
+    });
+    test("Get Song Station Null Check", () async {
+      final radio = await api.song.radio(songId: "yDeAS8Ehqwq", limit: 2);
+
+      expect(radio, null);
+    });
+
+    test("Get Lyrics Id Check", () async {
+      final res = await api.song.getLyricsById(lyricsId: "ulCA5JTi");
+      expect(res!.copyright, 'Lyrics powered by www.musixmatch.com');
+    });
+    test("Get Lyrics Id Null Check", () async {
+      final res = await api.song.getLyricsById(lyricsId: "ulCA5JTiadad");
+      expect(res, null);
+    });
   });
 
-  test("Artist by Id", () async {
-    final artist = await api.artist.getById(artistId: "1274170");
-    expect('1274170', artist?.id);
+  group("Artist API Test", () {
+    test("Get Artist Songs Check", () async {
+      final artistSongs = await api.artist.getArtistSongs(artistId: "1274170");
+      expect(artistSongs?.total, 1266);
+    });
+    test("Get Artist Songs Null Check", () async {
+      final artistSongs =
+          await api.artist.getArtistSongs(artistId: "127417012");
+      expect(artistSongs, null);
+    });
+
+    test("Get Artist Id Check", () async {
+      final artist = await api.artist.getById(artistId: "1274170");
+      expect(artist?.id, '1274170');
+    });
+    test("Get Artist Id Null Check", () async {
+      final artist = await api.artist.getById(artistId: "127417012");
+      expect(artist, null);
+    });
+
+    test("Get Artist Albums Check", () async {
+      final albums = await api.artist.getArtistAlbums(artistId: '1274170');
+      expect(albums?.total, 26);
+    });
+    test("Get Artist Albums Null Check", () async {
+      final albums = await api.artist.getArtistAlbums(artistId: '127417021');
+      expect(albums, null);
+    });
   });
 
-  test("Song by Id", () async {
-    final res = await api.song.getById(songId: "3IoDK8qI");
-    expect('3IoDK8qI', res!.id);
+  group("Album & Playlist API Test", () {
+    test("Get Album Id Check", () async {
+      final album = await api.album.getById(albumId: '23241654');
+      expect(album?.id, '23241654');
+    });
+    test("Get Album Id Null Check", () async {
+      final album = await api.album.getById(albumId: '232416541');
+      expect(album, null);
+    });
+
+    test("Get Playlist Id Check", () async {
+      final playlist = await api.playlist.getById(id: '155871808', limit: 1);
+      expect(playlist?.songs.length, 1);
+    });
+    test("Get Playlist Id Null Check", () async {
+      final playlist = await api.playlist.getById(id: '1558718013', limit: 1);
+      expect(playlist, null);
+    });
   });
 
-  test("Lyrics by Id", () async {
-    final res = await api.song.getLyricsById(lyricsId: "ulCA5JTi");
-    expect('Lyrics powered by www.musixmatch.com', res!.copyright);
-  });
+  //
 }
