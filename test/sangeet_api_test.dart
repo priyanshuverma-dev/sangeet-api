@@ -6,9 +6,28 @@ void main() {
 
   group("Search API Test", () {
     test("Get Global Search Check", () async {
-      final rs = await api.search.global(query: "Dua Lipa");
+      final res = await api.search.global(query: "Dua Lipa");
 
-      expect(null, null);
+      expect(res?.top.artists[0].title, 'Dua Lipa');
+    });
+    test("Get Song Search Check", () async {
+      final res = await api.search.songs(query: "Sajni");
+
+      expect(res?.start, 1);
+    });
+    test("Get Album Search Check", () async {
+      final res = await api.search.albums(query: "Dua Lipa");
+
+      expect(res?.start, 1);
+    });
+    test("Get Artist Search Check", () async {
+      final res = await api.search.artists(query: "Dua Lipa");
+
+      expect(res?.start, 1);
+    });
+    test("Get Playlist Search Check", () async {
+      final res = await api.search.playlists(query: "Dua Lipa");
+      expect(res?.start, 1);
     });
   });
 

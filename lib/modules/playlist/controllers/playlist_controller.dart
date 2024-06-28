@@ -32,7 +32,7 @@ class PlaylistController {
       }
 
       if (resp["title"] == '') {
-        throw Error.safeToString("Playlist not found");
+        throw Error.throwWithStackTrace("Playlist not found", StackTrace.empty);
       }
 
       final playlist = PlaylistModel.fromMap(resp);
