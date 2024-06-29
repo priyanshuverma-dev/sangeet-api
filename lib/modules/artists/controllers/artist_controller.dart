@@ -15,6 +15,14 @@ class ArtistController {
     required Dio client,
   }) : _client = client;
 
+  /// Get artist by id
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final artist = await api.artist.getById(artistId: "123");
+  /// ```
+  /// Returns [ArtistModel] if found
+  /// Returns [null] if not found
+
   Future<ArtistModel?> getById({required String artistId}) async {
     try {
       final res = await _client.get("/", queryParameters: {
@@ -40,6 +48,14 @@ class ArtistController {
       return null;
     }
   }
+
+  /// Get artist songs
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final songs = await api.artist.getArtistSongs(artistId: "123");
+  /// ```
+  /// Returns [ArtistSongsModel] if found
+  /// Returns [null] if not found
 
   Future<ArtistSongsModel?> getArtistSongs(
       {required String artistId, int page = 0}) async {
@@ -74,6 +90,14 @@ class ArtistController {
       return null;
     }
   }
+
+  /// Get artist albums
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final albums = await api.artist.getArtistAlbums(artistId: "123");
+  /// ```
+  /// Returns [ArtistAlbumsModel] if found
+  /// Returns [null] if not found
 
   Future<ArtistAlbumsModel?> getArtistAlbums(
       {required String artistId, int page = 0}) async {

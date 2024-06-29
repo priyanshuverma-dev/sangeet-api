@@ -1,3 +1,9 @@
-## 0.0.1
+## 0.1.1
 
-* TODO: Describe initial release.
+* Fetch Songs by Id, Song lyrics, song radio.
+* Fetch Artist by Id, Artist songs, Artist albums.
+* Fetch Playlist by Id.
+* Fetch Album by Id.
+* Fetch Seach songs, artist, playlist, album and global search.
+* Fetch browse data, trending data, charts.
+* Unit Tests. ✅

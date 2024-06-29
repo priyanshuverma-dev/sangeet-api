@@ -11,6 +11,19 @@ class PlaylistController {
     required Dio client,
   }) : _client = client;
 
+  /// Get playlist by id
+  ///
+  /// required [id] should be a valid playlist id
+  ///
+  /// optional [page] and [limit] for pagination
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final playlist = await api.playlist.getById(id: "123");
+  /// ```
+  /// Returns [PlaylistModel] if found
+  /// Returns [null] if not found
+
   Future<PlaylistModel?> getById({
     required String id,
     int page = 0,

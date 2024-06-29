@@ -13,6 +13,18 @@ class SongController {
     required Dio client,
   }) : _client = client;
 
+  /// Get song by id
+  ///
+  /// required [songId] should be a valid song id
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final song = await api.song.getById(songId: "123");
+  /// ```
+  /// Returns [SongModel] if found
+  ///
+  /// Returns [null] if not found
+
   Future<SongModel?> getById({required String songId}) async {
     try {
       final res = await _client.get("/", queryParameters: {
@@ -36,6 +48,18 @@ class SongController {
       return null;
     }
   }
+
+  /// Get song lyrics by id
+  ///
+  /// required [lyricsId] should be a valid lyrics id
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final lyrics = await api.song.getLyricsById(lyricsId: "
+  /// ```
+  /// Returns [SongLyricsModel] if found
+  ///
+  /// Returns [null] if not found
 
   Future<SongLyricsModel?> getLyricsById({required String lyricsId}) async {
     try {
@@ -114,6 +138,24 @@ class SongController {
       return null;
     }
   }
+
+  /// Get song radio
+  ///
+  /// required [songId] should be a valid song id
+  ///
+  /// optional [featured] if true will create a featured station
+  ///
+  /// optional [limit] number of songs to return
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final radio = await api.song.radio(songId: "123", limit: 10);
+  ///
+  /// ```
+  ///
+  /// Returns [SongRadioModel] if found
+  ///
+  /// Returns [null] if not found
 
   Future<SongRadioModel?> radio({
     bool featured = false,

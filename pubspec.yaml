@@ -1,7 +1,7 @@
 name: sangeet_api
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "Sangeet API is a SDK on top of Jio cinema API to integrate with Sangget app."
+version: 0.1.1
+homepage: https://github.com/priyanshuverma-dev/sangeet-api
 
 environment:
   sdk: '>=3.3.3 <4.0.0'

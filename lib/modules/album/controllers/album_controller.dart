@@ -11,6 +11,14 @@ class AlbumController {
     required Dio client,
   }) : _client = client;
 
+  /// Get album by id
+  /// ```dart
+  /// final album = await AlbumController().getById(albumId: "123");
+  /// ```
+  ///
+  /// Returns [AlbumModel] if found
+  /// Returns [null] if not found
+  ///
   Future<AlbumModel?> getById({required String albumId}) async {
     try {
       final res = await _client.get("/", queryParameters: {

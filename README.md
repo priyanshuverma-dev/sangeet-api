@@ -11,29 +11,37 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Sangeet API is a SDK on top of Jio cinema API to integrate with Sangget app.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* Fetch Songs by Id, Song lyrics, song radio.
+* Fetch Artist by Id, Artist songs, Artist albums.
+* Fetch Playlist by Id.
+* Fetch Album by Id.
+* Fetch Seach songs, artist, playlist, album and global search.
+* Fetch browse data, trending data, charts.
+* Unit Tests. ✅
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Just install and use.
+
+```bash
+flutter pub add sangeet_api
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
+How to use.
+Make a instance of SDK and use that
 ```dart
-const like = 'sample';
+const api = SangeetAPI();
+final result = await api.explore.trends();
+// use result 
+
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Author [Priyanshu Verma](https://github.com/priyanshuverma-dev/sangeet-api)

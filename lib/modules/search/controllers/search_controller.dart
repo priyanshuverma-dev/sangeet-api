@@ -15,6 +15,17 @@ class SearchController {
     required Dio client,
   }) : _client = client;
 
+  /// Search for all types of data
+  ///
+  /// required [query] should be a valid search query
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final search = await api.search.global(query: "search query");
+  /// ```
+  /// Returns [SearchResultModel] if found
+  /// Returns [null] if not found
+
   Future<SearchResultModel?> global({required String query}) async {
     try {
       final res = await _client.get("/", queryParameters: {
@@ -40,7 +51,21 @@ class SearchController {
     }
   }
 
-  Future<SearchResults?> songs({
+  /// Search for songs
+  ///
+  /// required [query] should be a valid search query
+  ///
+  /// optional [page] and [limit] for pagination
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final songs = await api.search.songs(query: "search query");
+  /// ```
+  ///
+  /// Returns [SearchResults] if found
+  /// Returns [null] if not found
+
+  Future<SearchResults<SongModel>?> songs({
     required String query,
     int page = 1,
     int limit = 10,
@@ -78,7 +103,20 @@ class SearchController {
     }
   }
 
-  Future<SearchResults?> albums({
+  // Search for albums
+  ///
+  /// required [query] should be a valid search query
+  ///
+  /// optional [page] and [limit] for pagination
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final albums = await api.search.albums(query: "search query");
+  /// ```
+  ///
+  /// Returns [SearchResults] if found
+  /// Returns [null] if not found
+  Future<SearchResults<AlbumModel>?> albums({
     required String query,
     int page = 1,
     int limit = 10,
@@ -116,7 +154,21 @@ class SearchController {
     }
   }
 
-  Future<SearchResults?> artists({
+  /// Search for artists
+  ///
+  /// required [query] should be a valid search query
+  ///
+  /// optional [page] and [limit] for pagination
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final artists = await api.search.artists(query: "search query");
+  /// ```
+  ///
+  /// Returns [SearchResults] if found
+  /// Returns [null] if not found
+
+  Future<SearchResults<ArtistMapModel>?> artists({
     required String query,
     int page = 1,
     int limit = 10,
@@ -154,7 +206,21 @@ class SearchController {
     }
   }
 
-  Future<SearchResults?> playlists({
+  /// Search for playlists
+  ///
+  /// required [query] should be a valid search query
+  ///
+  /// optional [page] and [limit] for pagination
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final playlists = await api.search.playlists(query: "search query");
+  /// ```
+  ///
+  /// Returns [SearchResults] if found
+  /// Returns [null] if not found
+
+  Future<SearchResults<PlaylistMapModel>?> playlists({
     required String query,
     int page = 1,
     int limit = 10,

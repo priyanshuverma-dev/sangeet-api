@@ -13,6 +13,15 @@ class ExploreController {
     required Dio client,
   }) : _client = client;
 
+  /// Get browse data
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final browse = await api.explore.browse();
+  /// ```
+  /// Returns [BrowseModel] if found
+  /// Returns [null] if not found
+
   Future<BrowseModel?> browse() async {
     try {
       final res = await _client.get("/", queryParameters: {
@@ -36,6 +45,17 @@ class ExploreController {
       return null;
     }
   }
+
+  /// Get trending data
+  ///
+  /// required [limit] should be greater or equal to 10
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final trending = await api.explore.trending();
+  /// ```
+  /// Returns [BrowseTrendingModel] if found
+  /// Returns [null] if not found
 
   Future<BrowseTrendingModel?> trending({int limit = 10}) async {
     try {
@@ -62,6 +82,19 @@ class ExploreController {
       return null;
     }
   }
+
+  /// Get chart data
+  ///
+  /// required [limit] should be greater or equal to 10
+  ///
+  /// required [page] should be greater or equal to 1
+  ///
+  /// ```dart
+  /// final api = SangeetApi();
+  /// final chart = await api.explore.chart(token: "123");
+  /// ```
+  /// Returns [PlaylistModel] if found
+  /// Returns [null] if not found
 
   Future<PlaylistModel?> chart({
     required String token,
