@@ -7,6 +7,7 @@ class Endpoints {
 
   static const String modules = 'content.getBrowseModules';
   static const String trending = 'content.getTrending';
+  static const String get = 'webapi.get';
 }
 
 class SearchEndpoints {
@@ -28,6 +29,7 @@ class SongsEndpoints {
   final String suggestions = 'webradio.getSong';
   final String lyrics = 'lyrics.getLyrics';
   final String station = 'webradio.createEntityStation';
+  final String featured = 'webradio.createFeaturedStation';
 }
 
 class AlbumsEndpoints {

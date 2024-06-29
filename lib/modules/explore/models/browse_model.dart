@@ -4,10 +4,8 @@ import 'package:sangeet_api/modules/playlist/models/playlist_map_model.dart';
 import 'browse_chart_model.dart';
 import 'browse_radio_model.dart';
 import 'browse_trending_model.dart';
-import 'browse_channel_model.dart';
 
 class BrowseModel {
-  final List<BrowseChannelModel> discovers;
   final List<BrowseChartModel> charts;
   final List<AlbumModel> albums;
   final List<PlaylistMapModel> topPlaylists;
@@ -15,7 +13,6 @@ class BrowseModel {
   final BrowseTrendingModel trending;
 
   BrowseModel({
-    required this.discovers,
     required this.charts,
     required this.albums,
     required this.topPlaylists,
@@ -25,10 +22,6 @@ class BrowseModel {
 
   factory BrowseModel.fromMap(Map<String, dynamic> map) {
     return BrowseModel(
-      discovers: List<BrowseChannelModel>.from(
-          map['browse_discover'].map<BrowseChannelModel>(
-        (e) => BrowseChannelModel.fromMap(e),
-      )),
       charts: List<BrowseChartModel>.from(map['charts'].map<BrowseChartModel>(
         (e) => BrowseChartModel.fromMap(e),
       )),

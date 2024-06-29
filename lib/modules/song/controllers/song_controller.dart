@@ -89,13 +89,45 @@ class SongController {
     }
   }
 
+  Future<String?> _createFeaturesStation({required String name}) async {
+    try {
+      final res = await _client.get("/", queryParameters: {
+        "ctx": "wap6dot0",
+        "__call": Endpoints.songs.featured,
+        "name": name,
+      });
+
+      final resp = jsonDecode(res.data);
+      if (resp["error"] != null) {
+        throw Error.throwWithStackTrace(
+          resp['error']['msg'],
+          StackTrace.current,
+        );
+      }
+
+      final String stationId = resp['stationid'];
+      return stationId;
+    } catch (e) {
+      if (kDebugMode) {
+        print("ERROR: $e");
+      }
+      return null;
+    }
+  }
+
   Future<SongRadioModel?> radio({
+    bool featured = false,
     required String songId,
     int limit = 10,
   }) async {
     try {
       assert(limit >= 2, 'Limit should be greater than 2');
-      String? stationId = await _createStation(songId: songId);
+
+      String? stationId;
+      if (featured) {
+        stationId = await _createFeaturesStation(name: songId);
+      }
+      stationId = await _createStation(songId: songId);
 
       final res = await _client.get("/", queryParameters: {
         "ctx": "android",

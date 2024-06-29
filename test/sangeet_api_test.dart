@@ -14,6 +14,13 @@ void main() {
       final data = await api.explore.browse();
       expect(data?.charts.length, 6);
     });
+
+    test("Get Chart Data Check", () async {
+      final explore = await api.explore.browse();
+      final token = explore?.charts[0].token;
+      final data = await api.explore.chart(token: token!, limit: 20);
+      expect(data?.songs.length, 20);
+    });
   });
 
   group("Search API Test", () {
@@ -78,7 +85,7 @@ void main() {
   group("Artist API Test", () {
     test("Get Artist Songs Check", () async {
       final artistSongs = await api.artist.getArtistSongs(artistId: "1274170");
-      expect(artistSongs?.total, 1266);
+      expect(artistSongs?.total, 1277);
     });
     test("Get Artist Songs Null Check", () async {
       final artistSongs =
@@ -97,7 +104,7 @@ void main() {
 
     test("Get Artist Albums Check", () async {
       final albums = await api.artist.getArtistAlbums(artistId: '1274170');
-      expect(albums?.total, 26);
+      expect(albums?.total, 27);
     });
     test("Get Artist Albums Null Check", () async {
       final albums = await api.artist.getArtistAlbums(artistId: '127417021');
