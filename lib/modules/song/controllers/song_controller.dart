@@ -113,12 +113,14 @@ class SongController {
     }
   }
 
-  Future<String?> _createFeaturesStation({required String name}) async {
+  Future<String?> _createFeaturesStation(
+      {required String name, required String language}) async {
     try {
       final res = await _client.get("/", queryParameters: {
         "ctx": "wap6dot0",
         "__call": Endpoints.songs.featured,
         "name": name,
+        "language": language,
       });
 
       final resp = jsonDecode(res.data);
@@ -161,13 +163,15 @@ class SongController {
     bool featured = false,
     required String songId,
     int limit = 10,
+    String language = "hindi",
   }) async {
     try {
       assert(limit >= 2, 'Limit should be greater than 2');
 
       String? stationId;
       if (featured) {
-        stationId = await _createFeaturesStation(name: songId);
+        stationId =
+            await _createFeaturesStation(name: songId, language: language);
       }
       stationId = await _createStation(songId: songId);
 

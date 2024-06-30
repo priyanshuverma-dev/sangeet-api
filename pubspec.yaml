@@ -1,6 +1,6 @@
 name: sangeet_api
 description: "Sangeet API is a SDK on top of Jio cinema API to integrate with Sangget app."
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/priyanshuverma-dev/sangeet-api
 repository: https://github.com/priyanshuverma-dev/sangeet-api
 issue_tracker: https://github.com/priyanshuverma-dev/sangeet-api/issues
