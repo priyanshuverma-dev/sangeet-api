@@ -1,3 +1,7 @@
+## 0.1.2
+* radio for featured fixed 
+* Unit Tests. ✅
+
 ## 0.1.1
 
 * Fetch Songs by Id, Song lyrics, song radio.

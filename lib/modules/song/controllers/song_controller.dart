@@ -117,10 +117,10 @@ class SongController {
       {required String name, required String language}) async {
     try {
       final res = await _client.get("/", queryParameters: {
+        "language": language,
         "ctx": "wap6dot0",
         "__call": Endpoints.songs.featured,
         "name": name,
-        "language": language,
       });
 
       final resp = jsonDecode(res.data);
@@ -162,7 +162,7 @@ class SongController {
   Future<SongRadioModel?> radio({
     bool featured = false,
     required String songId,
-    int limit = 10,
+    int limit = 20,
     String language = "hindi",
   }) async {
     try {
@@ -172,19 +172,21 @@ class SongController {
       if (featured) {
         stationId =
             await _createFeaturesStation(name: songId, language: language);
+      } else {
+        stationId = await _createStation(songId: songId);
       }
-      stationId = await _createStation(songId: songId);
 
       final res = await _client.get("/", queryParameters: {
+        "stationid": stationId,
         "ctx": "android",
         "__call": Endpoints.songs.suggestions,
-        "stationid": stationId,
         "k": limit
       });
 
       final resp = jsonDecode(res.data);
-      if (resp["error"] != null) {
-        throw Error.throwWithStackTrace(resp['error'], StackTrace.current);
+      if (res.data == "[]" || resp['error'] != null) {
+        throw Error.throwWithStackTrace(
+            resp['error'] ?? "Can't fetch radio", StackTrace.current);
       }
 
       final suggestions = Map<String, dynamic>.from(resp)..remove('stationid');

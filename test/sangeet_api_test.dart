@@ -62,14 +62,23 @@ void main() {
     });
 
     test("Get Song Station Check", () async {
-      final radio = await api.song.radio(songId: "yDeAS8Eh", limit: 2);
+      final radio =
+          await api.song.radio(songId: "yDeAS8Eh", limit: 2, featured: false);
 
       expect(radio?.total, 2);
     });
     test("Get Song Station Null Check", () async {
-      final radio = await api.song.radio(songId: "yDeAS8Ehqwq", limit: 2);
+      final radio = await api.song
+          .radio(songId: "yDeAS8Ehqwq", limit: 2, featured: false);
 
       expect(radio, null);
+    });
+
+    test("Get Featured Station Check", () async {
+      final radio = await api.song
+          .radio(songId: "Sufiyana Safar", limit: 2, featured: true);
+
+      expect(radio?.total, 2);
     });
 
     test("Get Lyrics Id Check", () async {
