@@ -40,7 +40,7 @@ class BrowseModel {
         (e) => TrendModel(
           id: e['id'],
           title: e['title'],
-          subtitle: e['subtitle'] == "" ? e['subtitle'] : e["language"],
+          subtitle: e['subtitle'] != "" ? e['subtitle'] : e["language"],
           image: e['image'],
           url: e['perma_url'],
           explicitContent: e["explicit_content"] == "1",
