@@ -7,12 +7,14 @@ class TrendModel {
   final String subtitle;
   final String image;
   final String url;
+  final String type;
   final Color? accentColor;
   final bool explicitContent;
 
   TrendModel({
     required this.id,
     required this.title,
+    required this.type,
     required this.subtitle,
     required this.image,
     this.accentColor,
@@ -26,11 +28,13 @@ class TrendModel {
     String? subtitle,
     String? image,
     String? url,
+    String? type,
     Color? accentColor,
     bool? explicitContent,
   }) {
     return TrendModel(
       id: id ?? this.id,
+      type: type ?? this.type,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       image: image ?? this.image,

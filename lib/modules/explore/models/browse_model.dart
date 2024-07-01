@@ -41,6 +41,7 @@ class BrowseModel {
           id: e['id'],
           title: e['title'],
           subtitle: e['subtitle'] != "" ? e['subtitle'] : e["language"],
+          type: e['type'],
           image: e['image'],
           url: e['perma_url'],
           explicitContent: e["explicit_content"] == "1",
