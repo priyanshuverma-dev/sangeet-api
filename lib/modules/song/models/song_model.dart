@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
 
@@ -99,5 +100,51 @@ class SongModel {
       permaUrl: $permaUrl \n
 
 """;
+  }
+
+  SongModel copyWith({
+    String? id,
+    String? title,
+    String? subtitle,
+    String? label,
+    String? type,
+    List<DownloadUrl>? images,
+    String? language,
+    String? year,
+    int? playCount,
+    bool? explicitContent,
+    bool? hasLyrics,
+    String? lyricsId,
+    String? releaseDate,
+    int? duration,
+    String? copyright,
+    String? albumId,
+    String? albumName,
+    List<ArtistMapModel>? artists,
+    List<DownloadUrl>? urls,
+    String? permaUrl,
+  }) {
+    return SongModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      label: label ?? this.label,
+      type: type ?? this.type,
+      images: images ?? this.images,
+      language: language ?? this.language,
+      year: year ?? this.year,
+      playCount: playCount ?? this.playCount,
+      explicitContent: explicitContent ?? this.explicitContent,
+      hasLyrics: hasLyrics ?? this.hasLyrics,
+      lyricsId: lyricsId ?? this.lyricsId,
+      releaseDate: releaseDate ?? this.releaseDate,
+      duration: duration ?? this.duration,
+      copyright: copyright ?? this.copyright,
+      albumId: albumId ?? this.albumId,
+      albumName: albumName ?? this.albumName,
+      artists: artists ?? this.artists,
+      urls: urls ?? this.urls,
+      permaUrl: permaUrl ?? this.permaUrl,
+    );
   }
 }

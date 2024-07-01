@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:sangeet_api/modules/album/models/album_model.dart';
 import 'package:sangeet_api/modules/playlist/models/playlist_map_model.dart';
@@ -86,5 +87,51 @@ class ArtistModel {
   @override
   String toString() {
     return 'ArtistModel(id: $id, name: $name, subtitle: $subtitle, images: $images, followersCount: $followersCount, type: $type, isVerified: $isVerified, dominantLanguage: $dominantLanguage, dominantType: $dominantType, bio: $bio, dob: $dob, fb: $fb, twitter: $twitter, wiki: $wiki, availableLanguages: $availableLanguages, fanCount: $fanCount, topSongs: $topSongs)';
+  }
+
+  ArtistModel copyWith({
+    String? id,
+    String? name,
+    String? subtitle,
+    List<DownloadUrl>? images,
+    int? followersCount,
+    String? type,
+    bool? isVerified,
+    String? dominantLanguage,
+    String? dominantType,
+    String? bio,
+    String? dob,
+    String? fb,
+    String? twitter,
+    String? wiki,
+    List<String>? availableLanguages,
+    int? fanCount,
+    List<SongModel>? topSongs,
+    List<AlbumModel>? topAlbums,
+    List<PlaylistMapModel>? featuredPlaylists,
+    List<PlaylistMapModel>? singlesPlaylists,
+  }) {
+    return ArtistModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      subtitle: subtitle ?? this.subtitle,
+      images: images ?? this.images,
+      followersCount: followersCount ?? this.followersCount,
+      type: type ?? this.type,
+      isVerified: isVerified ?? this.isVerified,
+      dominantLanguage: dominantLanguage ?? this.dominantLanguage,
+      dominantType: dominantType ?? this.dominantType,
+      bio: bio ?? this.bio,
+      dob: dob ?? this.dob,
+      fb: fb ?? this.fb,
+      twitter: twitter ?? this.twitter,
+      wiki: wiki ?? this.wiki,
+      availableLanguages: availableLanguages ?? this.availableLanguages,
+      fanCount: fanCount ?? this.fanCount,
+      topSongs: topSongs ?? this.topSongs,
+      topAlbums: topAlbums ?? this.topAlbums,
+      featuredPlaylists: featuredPlaylists ?? this.featuredPlaylists,
+      singlesPlaylists: singlesPlaylists ?? this.singlesPlaylists,
+    );
   }
 }

@@ -12,6 +12,7 @@ export './modules/explore/models/browse_chart_model.dart';
 export './modules/explore/models/browse_model.dart';
 export './modules/explore/models/browse_radio_model.dart';
 export './modules/explore/models/browse_trending_model.dart';
+export './modules/explore/models/trend_model.dart';
 
 export './modules/playlist/models/playlist_map_model.dart';
 export './modules/playlist/models/playlist_model.dart';

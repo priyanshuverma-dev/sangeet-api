@@ -1,5 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:sangeet_api/common/models/download_url_model.dart';
-
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
 import 'package:sangeet_api/modules/song/models/song_model.dart';
 
@@ -55,6 +55,38 @@ class PlaylistModel {
           (e) => SongModel.fromMap(e),
         ),
       ),
+    );
+  }
+
+  PlaylistModel copyWith({
+    String? id,
+    String? title,
+    String? subtitle,
+    String? type,
+    List<DownloadUrl>? images,
+    String? language,
+    String? year,
+    int? playCount,
+    bool? explicitContent,
+    int? fanCount,
+    int? followerCount,
+    List<ArtistMapModel>? artists,
+    List<SongModel>? songs,
+  }) {
+    return PlaylistModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      type: type ?? this.type,
+      images: images ?? this.images,
+      language: language ?? this.language,
+      year: year ?? this.year,
+      playCount: playCount ?? this.playCount,
+      explicitContent: explicitContent ?? this.explicitContent,
+      fanCount: fanCount ?? this.fanCount,
+      followerCount: followerCount ?? this.followerCount,
+      artists: artists ?? this.artists,
+      songs: songs ?? this.songs,
     );
   }
 }

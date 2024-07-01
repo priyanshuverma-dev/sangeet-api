@@ -1,3 +1,8 @@
+## 0.1.3
+* Trend Model changed and copywith fn added
+* Unit Tests. ✅
+
+
 ## 0.1.2
 * radio for featured fixed 
 * Unit Tests. ✅
