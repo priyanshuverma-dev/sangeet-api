@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
 
@@ -23,10 +25,12 @@ class SongModel {
   final List<ArtistMapModel> artists;
   final List<DownloadUrl> urls;
   final String permaUrl;
+  final Color? accentColor;
 
   SongModel({
     required this.id,
     required this.title,
+    this.accentColor,
     required this.subtitle,
     required this.label,
     required this.type,
@@ -123,6 +127,7 @@ class SongModel {
     List<ArtistMapModel>? artists,
     List<DownloadUrl>? urls,
     String? permaUrl,
+    Color? accentColor,
   }) {
     return SongModel(
       id: id ?? this.id,
@@ -130,6 +135,7 @@ class SongModel {
       subtitle: subtitle ?? this.subtitle,
       label: label ?? this.label,
       type: type ?? this.type,
+      accentColor: accentColor ?? this.accentColor,
       images: images ?? this.images,
       language: language ?? this.language,
       year: year ?? this.year,

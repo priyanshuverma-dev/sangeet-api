@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:sangeet_api/modules/album/models/album_model.dart';
 import 'package:sangeet_api/modules/playlist/models/playlist_map_model.dart';
@@ -23,6 +25,8 @@ class ArtistModel {
   final int fanCount;
   final List<SongModel> topSongs;
   final List<AlbumModel> topAlbums;
+  final Color? accentColor;
+
   final List<PlaylistMapModel> featuredPlaylists;
   final List<PlaylistMapModel> singlesPlaylists;
   ArtistModel({
@@ -38,6 +42,7 @@ class ArtistModel {
     this.bio,
     this.dob,
     this.fb,
+    this.accentColor,
     this.twitter,
     this.wiki,
     required this.availableLanguages,
@@ -110,6 +115,7 @@ class ArtistModel {
     List<AlbumModel>? topAlbums,
     List<PlaylistMapModel>? featuredPlaylists,
     List<PlaylistMapModel>? singlesPlaylists,
+    Color? accentColor,
   }) {
     return ArtistModel(
       id: id ?? this.id,
@@ -122,6 +128,7 @@ class ArtistModel {
       dominantLanguage: dominantLanguage ?? this.dominantLanguage,
       dominantType: dominantType ?? this.dominantType,
       bio: bio ?? this.bio,
+      accentColor: accentColor ?? this.accentColor,
       dob: dob ?? this.dob,
       fb: fb ?? this.fb,
       twitter: twitter ?? this.twitter,

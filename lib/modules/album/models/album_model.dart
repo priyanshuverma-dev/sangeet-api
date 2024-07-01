@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
 import 'package:sangeet_api/modules/song/models/song_model.dart';
@@ -19,6 +21,8 @@ class AlbumModel {
   final List<ArtistMapModel> artists;
   final List<SongModel> songs;
 
+  final Color? accentColor;
+
   AlbumModel({
     required this.id,
     required this.title,
@@ -32,6 +36,7 @@ class AlbumModel {
     required this.listCount,
     required this.listType,
     this.copyright,
+    this.accentColor,
     required this.artists,
     required this.songs,
   });
@@ -85,6 +90,7 @@ class AlbumModel {
     String? copyright,
     List<ArtistMapModel>? artists,
     List<SongModel>? songs,
+    Color? accentColor,
   }) {
     return AlbumModel(
       id: id ?? this.id,
@@ -92,6 +98,7 @@ class AlbumModel {
       subtitle: subtitle ?? this.subtitle,
       type: type ?? this.type,
       images: images ?? this.images,
+      accentColor: accentColor ?? this.accentColor,
       language: language ?? this.language,
       year: year ?? this.year,
       playCount: playCount ?? this.playCount,
