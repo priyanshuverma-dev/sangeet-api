@@ -1,3 +1,5 @@
+import 'package:sangeet_api/common/constants.dart';
+
 class ArtistMapModel {
   final String id;
   final String name;
@@ -21,7 +23,9 @@ class ArtistMapModel {
       name: map['name'] as String,
       role: map['role'] as String,
       type: map['type'] as String,
-      image: map['image'] as String,
+      image: map['image'] == ""
+          ? Constants.artistDefaultImage
+          : map['image'] as String,
       url: map['perma_url'] as String,
     );
   }

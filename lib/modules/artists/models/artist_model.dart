@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
 
+import 'package:sangeet_api/common/constants.dart';
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:sangeet_api/modules/album/models/album_model.dart';
 import 'package:sangeet_api/modules/playlist/models/playlist_map_model.dart';
@@ -58,7 +59,8 @@ class ArtistModel {
         id: map['artistId'],
         name: map['name'],
         subtitle: map['subtitle'],
-        images: DownloadUrl.imagesUrls(map['image']),
+        images: DownloadUrl.imagesUrls(
+            map['image'] == "" ? Constants.artistDefaultImage : map['image']),
         followersCount: int.parse('0${map['follower_count']}'),
         type: map['type'],
         isVerified: map['isVerified'],

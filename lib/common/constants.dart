@@ -5,4 +5,7 @@ class Constants {
     "_marker": "0",
     "api_version": "4"
   };
+
+  static const String artistDefaultImage =
+      "https://staticfe.saavn.com/web6/jioindw/dist/1719471173/_i/default_images/default-artist-150x150.jpg";
 }
