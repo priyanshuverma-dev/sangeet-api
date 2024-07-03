@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sangeet_api/common/endpoints.dart';
+import 'package:sangeet_api/common/models/media_model.dart';
 import 'package:sangeet_api/modules/album/models/album_model.dart';
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
 import 'package:sangeet_api/modules/playlist/models/playlist_map_model.dart';
@@ -34,7 +35,6 @@ class SearchController {
         "query": query.replaceAll(' ', '+'),
       });
 
-      print(res.realUri);
       final resp = jsonDecode(res.data);
 
       if (resp == []) {
@@ -251,6 +251,27 @@ class SearchController {
         start: resp['start'],
         total: resp['total'],
       );
+    } catch (e) {
+      if (kDebugMode) {
+        print("GLOBAL SEARCH ERROR: $e");
+      }
+      return null;
+    }
+  }
+
+  Future<List<MediaModel>?> topSearches() async {
+    try {
+      final res = await _client.get("/", queryParameters: {
+        "ctx": "web6dot0",
+        "__call": Endpoints.topSearches,
+      });
+
+      final resp = jsonDecode(res.data);
+
+      List<MediaModel> results = resp.map((element) {
+        return MediaModel.fromMap(element);
+      });
+      return results;
     } catch (e) {
       if (kDebugMode) {
         print("GLOBAL SEARCH ERROR: $e");

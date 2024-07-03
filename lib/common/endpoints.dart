@@ -8,6 +8,7 @@ class Endpoints {
   static const String modules = 'content.getBrowseModules';
   static const String trending = 'content.getTrending';
   static const String get = 'webapi.get';
+  static const String topSearches = 'content.getTopSearches';
 }
 
 class SearchEndpoints {
