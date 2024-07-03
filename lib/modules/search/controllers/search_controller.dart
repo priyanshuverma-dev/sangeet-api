@@ -34,6 +34,7 @@ class SearchController {
         "query": query.replaceAll(' ', '+'),
       });
 
+      print(res.realUri);
       final resp = jsonDecode(res.data);
 
       if (resp == []) {
@@ -43,9 +44,9 @@ class SearchController {
 
       final results = SearchResultModel.fromMap(resp);
       return results;
-    } catch (e) {
+    } catch (e, s) {
       if (kDebugMode) {
-        print("GLOBAL SEARCH ERROR: $e");
+        print("GLOBAL SEARCH ERROR: $e $s");
       }
       return null;
     }

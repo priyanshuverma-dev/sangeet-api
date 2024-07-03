@@ -9,7 +9,6 @@ class SearchPlaylistModel {
   final String language;
   final bool explicitContent;
   final String description;
-  final List<String> artistName;
 
   SearchPlaylistModel({
     required this.id,
@@ -20,7 +19,6 @@ class SearchPlaylistModel {
     required this.language,
     required this.explicitContent,
     required this.description,
-    required this.artistName,
   });
 
   factory SearchPlaylistModel.fromMap(Map<String, dynamic> map) {
@@ -33,9 +31,6 @@ class SearchPlaylistModel {
       explicitContent: map['explicit_content'] == '1',
       description: map['description'],
       language: map['more_info']['language'],
-      artistName: List<String>.from(
-        map['more_info']['artist_name'].map((e) => e),
-      ),
     );
   }
 }
