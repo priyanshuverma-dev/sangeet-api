@@ -27,7 +27,7 @@ class BrowseRadioModel {
       title: map['title'],
       subtitle: map['subtitle'],
       image: map['image'],
-      accentColor: map['more_info']['color'],
+      accentColor: map['more_info']['color'] ?? "",
       language: map['more_info']['language'],
       description: map['more_info']['description'],
       type: map['type'],
