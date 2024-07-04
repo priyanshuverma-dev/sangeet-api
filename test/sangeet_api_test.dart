@@ -94,7 +94,7 @@ void main() {
   group("Artist API Test", () {
     test("Get Artist Songs Check", () async {
       final artistSongs = await api.artist.getArtistSongs(artistId: "1274170");
-      expect(artistSongs?.total, 1277);
+      expect(artistSongs?.total, 1278);
     });
     test("Get Artist Songs Null Check", () async {
       final artistSongs =
