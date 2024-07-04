@@ -184,6 +184,7 @@ class SongController {
       });
 
       final resp = jsonDecode(res.data);
+      print(resp);
       if (res.data == "[]" || resp['error'] != null) {
         throw Error.throwWithStackTrace(
             resp['error'] ?? "Can't fetch radio", StackTrace.current);

@@ -58,14 +58,15 @@ class ArtistController {
   /// Returns [null] if not found
 
   Future<ArtistSongsModel?> getArtistSongs(
-      {required String artistId, int page = 0}) async {
+      {required String artistId, int page = 1, int limit = 10}) async {
     try {
       final res = await _client.get("/", queryParameters: {
         "ctx": "web6dot0",
         "__call": Endpoints.artists.songs,
         "artistId": artistId,
         "page": page,
-        "sort_order": "latest"
+        "sort_order": "latest",
+        "n": limit,
       });
 
       final resp = jsonDecode(res.data);
@@ -100,14 +101,15 @@ class ArtistController {
   /// Returns [null] if not found
 
   Future<ArtistAlbumsModel?> getArtistAlbums(
-      {required String artistId, int page = 0}) async {
+      {required String artistId, int page = 1, int limit = 10}) async {
     try {
       final res = await _client.get("/", queryParameters: {
         "ctx": "web6dot0",
         "__call": Endpoints.artists.albums,
         "artistId": artistId,
         "page": page,
-        "sort_order": "latest"
+        "sort_order": "latest",
+        "n": limit,
       });
 
       final resp = jsonDecode(res.data);

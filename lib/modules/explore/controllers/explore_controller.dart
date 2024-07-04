@@ -31,8 +31,6 @@ class ExploreController {
 
       final resp = jsonDecode(res.data);
 
-      print(resp);
-
       if (resp["error"] != null) {
         throw Error.throwWithStackTrace("Can't fetch data", StackTrace.current);
       }
