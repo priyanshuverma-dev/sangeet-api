@@ -230,7 +230,7 @@ class SongController {
           .url;
 
       final savePathPrefix =
-          _defaultDownloadPath ?? await Utils.defaultDownloadPath();
+          _defaultDownloadPath ?? Utils.defaultDownloadPath();
       final savePath =
           "$savePathPrefix/$folder/${song.title} ${quality.name.replaceFirst('v', "")}.mp4";
 
@@ -240,6 +240,9 @@ class SongController {
       final res = await _client.downloadUri(
         Uri.parse(downloadUrl),
         savePath,
+        options: Options(
+          validateStatus: (status) => status == 200,
+        ),
       );
 
       if (res.statusCode != 200) {
@@ -277,7 +280,7 @@ class SongController {
           .url;
 
       final savePathPrefix =
-          _defaultDownloadPath ?? await Utils.defaultDownloadPath();
+          _defaultDownloadPath ?? Utils.defaultDownloadPath();
       final savePath = "$savePathPrefix/$folder/${song.id}.png";
 
       if (Directory(savePath).existsSync()) {
@@ -286,6 +289,9 @@ class SongController {
       final res = await _client.downloadUri(
         Uri.parse(downloadUrl),
         savePath,
+        options: Options(
+          validateStatus: (status) => status == 200,
+        ),
       );
 
       if (res.statusCode != 200) {
@@ -313,7 +319,7 @@ class SongController {
   }) async {
     try {
       final savePathPrefix =
-          _defaultDownloadPath ?? await Utils.defaultDownloadPath();
+          _defaultDownloadPath ?? Utils.defaultDownloadPath();
       final savePath = "$savePathPrefix/$folder/$fileName";
 
       if (Directory(savePath).existsSync()) {
@@ -322,6 +328,9 @@ class SongController {
       final res = await _client.downloadUri(
         Uri.parse(url),
         savePath,
+        options: Options(
+          validateStatus: (status) => status == 200,
+        ),
       );
 
       if (res.statusCode != 200) {

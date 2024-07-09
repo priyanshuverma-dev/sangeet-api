@@ -1,4 +1,5 @@
-import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:tripledes_nullsafety/tripledes_nullsafety.dart';
 
@@ -54,7 +55,8 @@ class Utils {
     }).toList();
   }
 
-  static Future<String> defaultDownloadPath() async {
-    return (await getApplicationDocumentsDirectory()).path;
+  static String defaultDownloadPath() {
+    final currentPath = Directory.current.path;
+    return "$currentPath/downloads";
   }
 }
