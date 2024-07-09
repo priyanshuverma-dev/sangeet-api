@@ -1,17 +1,20 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sangeet_api/common/endpoints.dart';
-import 'package:sangeet_api/modules/song/models/song_lyrics_model.dart';
-import 'package:sangeet_api/modules/song/models/song_model.dart';
-import 'package:sangeet_api/modules/song/models/song_radio_model.dart';
+import 'package:sangeet_api/common/utils.dart';
+import 'package:sangeet_api/models.dart';
 
 class SongController {
   final Dio _client;
+  final String? _defaultDownloadPath;
 
   SongController({
     required Dio client,
-  }) : _client = client;
+    String? defaultDownloadPath,
+  })  : _client = client,
+        _defaultDownloadPath = defaultDownloadPath;
 
   /// Get song by id
   ///
@@ -207,6 +210,135 @@ class SongController {
         print("ERROR: $e");
       }
       return null;
+    }
+  }
+
+  Future<DownloadRes> downloadById({
+    required String songId,
+    SongQuality quality = SongQuality.v160kbps,
+    String folder = 'songs',
+  }) async {
+    try {
+      final song = await getById(songId: songId);
+      if (song == null) {
+        return DownloadRes(success: false, failureMessage: "Song Not found");
+      }
+
+      final downloadUrl = song.urls
+          .where((element) => element.quality == quality.name)
+          .toList()[0]
+          .url;
+
+      final savePathPrefix =
+          _defaultDownloadPath ?? await Utils.defaultDownloadPath();
+      final savePath =
+          "$savePathPrefix/$folder/${song.title} ${quality.name.replaceFirst('v', "")}.mp4";
+
+      if (Directory(savePath).existsSync()) {
+        return DownloadRes(success: true);
+      }
+      final res = await _client.downloadUri(
+        Uri.parse(downloadUrl),
+        savePath,
+      );
+
+      if (res.statusCode != 200) {
+        return DownloadRes(
+          success: false,
+          failureMessage: "Unable to download song",
+        );
+      }
+
+      return DownloadRes(
+        success: true,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print("ERROR: $e");
+      }
+      return DownloadRes(success: false, failureMessage: e.toString());
+    }
+  }
+
+  Future<DownloadRes> downloadImageById({
+    required String songId,
+    ImageQuality quality = ImageQuality.medium,
+    String folder = 'images',
+  }) async {
+    try {
+      final song = await getById(songId: songId);
+      if (song == null) {
+        return DownloadRes(success: false, failureMessage: "Song Not found");
+      }
+
+      final downloadUrl = song.images
+          .where((element) => element.quality == quality.quality)
+          .toList()[0]
+          .url;
+
+      final savePathPrefix =
+          _defaultDownloadPath ?? await Utils.defaultDownloadPath();
+      final savePath = "$savePathPrefix/$folder/${song.id}.png";
+
+      if (Directory(savePath).existsSync()) {
+        return DownloadRes(success: true);
+      }
+      final res = await _client.downloadUri(
+        Uri.parse(downloadUrl),
+        savePath,
+      );
+
+      if (res.statusCode != 200) {
+        return DownloadRes(
+          success: false,
+          failureMessage: "Unable to download image",
+        );
+      }
+
+      return DownloadRes(
+        success: true,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print("ERROR: $e");
+      }
+      return DownloadRes(success: false, failureMessage: e.toString());
+    }
+  }
+
+  Future<DownloadRes> downloadByURL({
+    required String url,
+    String folder = 'others',
+    required String fileName,
+  }) async {
+    try {
+      final savePathPrefix =
+          _defaultDownloadPath ?? await Utils.defaultDownloadPath();
+      final savePath = "$savePathPrefix/$folder/$fileName";
+
+      if (Directory(savePath).existsSync()) {
+        return DownloadRes(success: true);
+      }
+      final res = await _client.downloadUri(
+        Uri.parse(url),
+        savePath,
+      );
+
+      if (res.statusCode != 200) {
+        return DownloadRes(
+          success: false,
+          failureMessage: "Unable to download image",
+        );
+      }
+
+      return DownloadRes(
+        success: true,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print("ERROR: $e");
+      }
+      return DownloadRes(success: false, failureMessage: e.toString());
     }
   }
 }

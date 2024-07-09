@@ -18,6 +18,10 @@ class SangeetAPI {
     ),
   );
 
+  final String? _defaultDownloadPath;
+  SangeetAPI({String? defaultDownloadPath})
+      : _defaultDownloadPath = defaultDownloadPath;
+
   /// explore has a set of functions to fetch trendings and initial or
   /// browse data like songs, albums, radios and more.
   ///
@@ -81,7 +85,10 @@ class SangeetAPI {
   /// ```
   /// More see [SongRadioModel]
   ///
-  SongController get song => SongController(client: _client);
+  SongController get song => SongController(
+        client: _client,
+        defaultDownloadPath: _defaultDownloadPath,
+      );
 
   /// artist has a set of functions to fetch artist details thier songs
   /// and albums

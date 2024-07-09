@@ -1,3 +1,4 @@
+import 'package:path_provider/path_provider.dart';
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:tripledes_nullsafety/tripledes_nullsafety.dart';
 
@@ -51,5 +52,9 @@ class Utils {
         url: url,
       );
     }).toList();
+  }
+
+  static Future<String> defaultDownloadPath() async {
+    return (await getApplicationDocumentsDirectory()).path;
   }
 }

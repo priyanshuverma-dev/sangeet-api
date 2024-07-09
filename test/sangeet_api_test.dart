@@ -55,10 +55,28 @@ void main() {
       final res = await api.song.getById(songId: "3IoDK8qI");
       expect(res!.id, "3IoDK8qI");
     });
-
     test("Get Song Id Null Check", () async {
       final res = await api.song.getById(songId: "3IoDK8qIas");
       expect(res, null);
+    });
+
+    test("Download Song Id Check", () async {
+      final res = await api.song.downloadById(songId: "3IoDK8qI");
+
+      expect(res.success, true);
+    });
+    test("Download Image Id Check", () async {
+      final res = await api.song.downloadImageById(songId: "3IoDK8qI");
+      expect(res.success, true);
+    });
+    test("Download Song Id ERROR Check", () async {
+      final res = await api.song.downloadById(songId: "3IoDK8qIadad");
+
+      expect(res.success, false);
+    });
+    test("Download Image Id ERROR Check", () async {
+      final res = await api.song.downloadImageById(songId: "3IoDK8qIada");
+      expect(res.success, false);
     });
 
     test("Get Song Station Check", () async {
