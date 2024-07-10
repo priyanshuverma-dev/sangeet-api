@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:sangeet_api/common/models/download_url_model.dart';
 import 'package:tripledes_nullsafety/tripledes_nullsafety.dart';
 
@@ -51,5 +53,10 @@ class Utils {
         url: url,
       );
     }).toList();
+  }
+
+  static String defaultDownloadPath() {
+    final currentPath = Directory.current.path;
+    return "$currentPath/downloads";
   }
 }

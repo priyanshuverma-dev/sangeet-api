@@ -1,3 +1,7 @@
+## 0.1.4
+* Download song by Id
+* Download song images
+
 ## 0.1.3
 * Trend Model changed and copywith fn added
 * Unit Tests. ✅

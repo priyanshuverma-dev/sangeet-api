@@ -1,4 +1,5 @@
 export './common/models/download_url_model.dart';
+export './common/models/download_response.dart';
 
 export './modules/album/models/album_model.dart';
 
