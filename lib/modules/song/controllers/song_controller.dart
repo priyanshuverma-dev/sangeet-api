@@ -217,6 +217,7 @@ class SongController {
     required String songId,
     SongQuality quality = SongQuality.v160kbps,
     String folder = 'songs',
+    String? path,
   }) async {
     try {
       final song = await getById(songId: songId);
@@ -229,8 +230,12 @@ class SongController {
           .toList()[0]
           .url;
 
-      final savePathPrefix =
-          _defaultDownloadPath ?? Utils.defaultDownloadPath();
+      String savePathPrefix;
+      if (path == null) {
+        savePathPrefix = _defaultDownloadPath ?? Utils.defaultDownloadPath();
+      } else {
+        savePathPrefix = path;
+      }
       final savePath =
           "$savePathPrefix/$folder/${song.title} ${quality.name.replaceFirst('v', "")}.mp4";
 
@@ -267,6 +272,7 @@ class SongController {
     required String songId,
     ImageQuality quality = ImageQuality.medium,
     String folder = 'images',
+    String? path,
   }) async {
     try {
       final song = await getById(songId: songId);
@@ -279,8 +285,13 @@ class SongController {
           .toList()[0]
           .url;
 
-      final savePathPrefix =
-          _defaultDownloadPath ?? Utils.defaultDownloadPath();
+      String savePathPrefix;
+      if (path == null) {
+        savePathPrefix = _defaultDownloadPath ?? Utils.defaultDownloadPath();
+      } else {
+        savePathPrefix = path;
+      }
+
       final savePath = "$savePathPrefix/$folder/${song.id}.png";
 
       if (Directory(savePath).existsSync()) {
@@ -316,10 +327,16 @@ class SongController {
     required String url,
     String folder = 'others',
     required String fileName,
+    String? path,
   }) async {
     try {
-      final savePathPrefix =
-          _defaultDownloadPath ?? Utils.defaultDownloadPath();
+      String savePathPrefix;
+      if (path == null) {
+        savePathPrefix = _defaultDownloadPath ?? Utils.defaultDownloadPath();
+      } else {
+        savePathPrefix = path;
+      }
+
       final savePath = "$savePathPrefix/$folder/$fileName";
 
       if (Directory(savePath).existsSync()) {
