@@ -15,7 +15,6 @@ class SongModel {
   final String year;
   final int playCount;
   final bool explicitContent;
-  final bool hasLyrics;
   final String? lyricsId;
   final String? releaseDate;
   final int duration;
@@ -39,7 +38,6 @@ class SongModel {
     required this.year,
     required this.playCount,
     required this.explicitContent,
-    required this.hasLyrics,
     required this.lyricsId,
     this.releaseDate,
     required this.duration,
@@ -64,7 +62,6 @@ class SongModel {
       explicitContent: map["explicit_content"] == "1",
       images: DownloadUrl.imagesUrls(map['image']), // !TODO!
       label: map["more_info"]['label'] as String,
-      hasLyrics: map["more_info"]['has_lyrics'] == 'false',
       lyricsId: map["id"],
       releaseDate: map["more_info"]['release_date'],
       duration: int.parse(map["more_info"]['duration']),
@@ -92,7 +89,6 @@ class SongModel {
       year: $year \n
       playCount: $playCount \n
       explicitContent: $explicitContent \n
-      hasLyrics: $hasLyrics \n
       lyricsId: $lyricsId \n
       releaseDate: $releaseDate \n
       duration: $duration \n
@@ -117,7 +113,6 @@ class SongModel {
     String? year,
     int? playCount,
     bool? explicitContent,
-    bool? hasLyrics,
     String? lyricsId,
     String? releaseDate,
     int? duration,
@@ -141,7 +136,6 @@ class SongModel {
       year: year ?? this.year,
       playCount: playCount ?? this.playCount,
       explicitContent: explicitContent ?? this.explicitContent,
-      hasLyrics: hasLyrics ?? this.hasLyrics,
       lyricsId: lyricsId ?? this.lyricsId,
       releaseDate: releaseDate ?? this.releaseDate,
       duration: duration ?? this.duration,

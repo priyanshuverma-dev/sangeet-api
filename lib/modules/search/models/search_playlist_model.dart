@@ -6,9 +6,7 @@ class SearchPlaylistModel {
   final String subtitle;
   final String type;
   final List<DownloadUrl> images;
-  final String language;
   final bool explicitContent;
-  final String description;
 
   SearchPlaylistModel({
     required this.id,
@@ -16,9 +14,7 @@ class SearchPlaylistModel {
     required this.subtitle,
     required this.type,
     required this.images,
-    required this.language,
     required this.explicitContent,
-    required this.description,
   });
 
   factory SearchPlaylistModel.fromMap(Map<String, dynamic> map) {
@@ -29,8 +25,6 @@ class SearchPlaylistModel {
       type: map['type'],
       images: DownloadUrl.imagesUrls(map['image']),
       explicitContent: map['explicit_content'] == '1',
-      description: map['description'],
-      language: map['more_info']['language'],
     );
   }
 }

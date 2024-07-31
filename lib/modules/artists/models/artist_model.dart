@@ -17,12 +17,6 @@ class ArtistModel {
   final bool isVerified;
   final String dominantLanguage;
   final String dominantType;
-  final String? bio;
-  final String? dob;
-  final String? fb;
-  final String? twitter;
-  final String? wiki;
-  final List<String> availableLanguages;
   final int fanCount;
   final List<SongModel> topSongs;
   final List<AlbumModel> topAlbums;
@@ -40,13 +34,7 @@ class ArtistModel {
     required this.isVerified,
     required this.dominantLanguage,
     required this.dominantType,
-    this.bio,
-    this.dob,
-    this.fb,
     this.accentColor,
-    this.twitter,
-    this.wiki,
-    required this.availableLanguages,
     required this.fanCount,
     required this.topSongs,
     required this.topAlbums,
@@ -66,8 +54,6 @@ class ArtistModel {
         isVerified: map['isVerified'],
         dominantLanguage: map['dominantLanguage'],
         dominantType: map['dominantType'],
-        availableLanguages:
-            List<String>.from(map['availableLanguages'].map((e) => e)),
         fanCount: int.parse(map['fan_count'] as String),
         topSongs: List<SongModel>.from(
           (map['topSongs']).map(
@@ -93,7 +79,7 @@ class ArtistModel {
 
   @override
   String toString() {
-    return 'ArtistModel(id: $id, name: $name, subtitle: $subtitle, images: $images, followersCount: $followersCount, type: $type, isVerified: $isVerified, dominantLanguage: $dominantLanguage, dominantType: $dominantType, bio: $bio, dob: $dob, fb: $fb, twitter: $twitter, wiki: $wiki, availableLanguages: $availableLanguages, fanCount: $fanCount, topSongs: $topSongs)';
+    return 'ArtistModel(id: $id, name: $name, subtitle: $subtitle, images: $images, followersCount: $followersCount, type: $type, isVerified: $isVerified, dominantLanguage: $dominantLanguage, dominantType: $dominantType, fanCount: $fanCount, topSongs: $topSongs)';
   }
 
   ArtistModel copyWith({
@@ -106,11 +92,6 @@ class ArtistModel {
     bool? isVerified,
     String? dominantLanguage,
     String? dominantType,
-    String? bio,
-    String? dob,
-    String? fb,
-    String? twitter,
-    String? wiki,
     List<String>? availableLanguages,
     int? fanCount,
     List<SongModel>? topSongs,
@@ -129,13 +110,7 @@ class ArtistModel {
       isVerified: isVerified ?? this.isVerified,
       dominantLanguage: dominantLanguage ?? this.dominantLanguage,
       dominantType: dominantType ?? this.dominantType,
-      bio: bio ?? this.bio,
       accentColor: accentColor ?? this.accentColor,
-      dob: dob ?? this.dob,
-      fb: fb ?? this.fb,
-      twitter: twitter ?? this.twitter,
-      wiki: wiki ?? this.wiki,
-      availableLanguages: availableLanguages ?? this.availableLanguages,
       fanCount: fanCount ?? this.fanCount,
       topSongs: topSongs ?? this.topSongs,
       topAlbums: topAlbums ?? this.topAlbums,
