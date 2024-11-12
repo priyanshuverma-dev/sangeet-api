@@ -52,8 +52,8 @@ class SongModel {
   factory SongModel.fromMap(Map<String, dynamic> map) {
     return SongModel(
       id: map["id"] as String,
-      title: map["title"] as String,
-      subtitle: map["subtitle"] as String,
+      title: decodeHtmlEntities(map["title"] as String),
+      subtitle: decodeHtmlEntities(map["subtitle"] as String),
       type: map["type"] as String,
       permaUrl: map["perma_url"] as String,
       language: map["language"] as String,
@@ -147,4 +147,27 @@ class SongModel {
       permaUrl: permaUrl ?? this.permaUrl,
     );
   }
+}
+
+String decodeHtmlEntities(String input) {
+  final entities = {
+    '&quot;': '"',
+    '&apos;': "'",
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&nbsp;': ' ',
+    '&copy;': '©',
+    '&reg;': '®',
+    '&euro;': '€',
+    '&pound;': '£',
+    '&yen;': '¥',
+    // Add more entities as needed
+  };
+
+  entities.forEach((entity, character) {
+    input = input.replaceAll(entity, character);
+  });
+
+  return input;
 }
