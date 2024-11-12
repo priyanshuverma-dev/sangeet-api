@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 import 'package:sangeet_api/common/models/download_url_model.dart';
+import 'package:sangeet_api/common/utils.dart';
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
 import 'package:sangeet_api/modules/song/models/song_model.dart';
 
@@ -44,8 +45,8 @@ class AlbumModel {
   factory AlbumModel.fromMap(Map<String, dynamic> map) {
     return AlbumModel(
       id: map['id'],
-      title: map['title'],
-      subtitle: map['subtitle'],
+      title: decodeHtmlEntities(map['title']),
+      subtitle: decodeHtmlEntities(map['subtitle']),
       type: map['type'],
       images: DownloadUrl.imagesUrls(map['image']),
       language: map['language'],

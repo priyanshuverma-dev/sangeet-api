@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 import 'package:sangeet_api/common/models/download_url_model.dart';
+import 'package:sangeet_api/common/utils.dart';
 import 'package:sangeet_api/modules/artists/models/artist_map_model.dart';
 
 class SongModel {
@@ -147,27 +148,4 @@ class SongModel {
       permaUrl: permaUrl ?? this.permaUrl,
     );
   }
-}
-
-String decodeHtmlEntities(String input) {
-  final entities = {
-    '&quot;': '"',
-    '&apos;': "'",
-    '&amp;': '&',
-    '&lt;': '<',
-    '&gt;': '>',
-    '&nbsp;': ' ',
-    '&copy;': '©',
-    '&reg;': '®',
-    '&euro;': '€',
-    '&pound;': '£',
-    '&yen;': '¥',
-    // Add more entities as needed
-  };
-
-  entities.forEach((entity, character) {
-    input = input.replaceAll(entity, character);
-  });
-
-  return input;
 }

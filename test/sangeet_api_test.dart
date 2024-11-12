@@ -12,7 +12,7 @@ void main() {
 
     test("Get Browse Data Check", () async {
       final data = await api.explore.browse();
-      expect(data?.charts.length, 6);
+      expect(data?.charts.length, 8);
     });
 
     test("Get Chart Data Check", () async {

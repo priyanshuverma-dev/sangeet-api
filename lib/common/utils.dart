@@ -60,3 +60,26 @@ class Utils {
     return "$currentPath/downloads";
   }
 }
+
+String decodeHtmlEntities(String input) {
+  final entities = {
+    '&quot;': '"',
+    '&apos;': "'",
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&nbsp;': ' ',
+    '&copy;': '©',
+    '&reg;': '®',
+    '&euro;': '€',
+    '&pound;': '£',
+    '&yen;': '¥',
+    // Add more entities as needed
+  };
+
+  entities.forEach((entity, character) {
+    input = input.replaceAll(entity, character);
+  });
+
+  return input;
+}
