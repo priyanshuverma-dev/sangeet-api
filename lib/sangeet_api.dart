@@ -1,6 +1,9 @@
 library sangeet_api;
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:sangeet_api/common/constants.dart';
 import 'package:sangeet_api/modules/album/controllers/album_controller.dart';
 import 'package:sangeet_api/modules/artists/controllers/artist_controller.dart';
@@ -10,8 +13,20 @@ import 'package:sangeet_api/modules/search/controllers/search_controller.dart';
 import 'package:sangeet_api/modules/song/controllers/song_controller.dart';
 
 class SangeetAPI {
+  static Dio createInstance(BaseOptions options) {
+    var dio = Dio(options);
+    dio.httpClientAdapter = IOHttpClientAdapter(
+      onHttpClientCreate: (client) {
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+        return client;
+      },
+    );
+    return dio;
+  }
+
   /// Main Dio instance with required [BaseOptions]. Don't change anything unexpected.
-  final Dio _client = Dio(
+  final Dio _client = createInstance(
     BaseOptions(
       baseUrl: Constants.serverUrl,
       queryParameters: Constants.defaultQueries,
